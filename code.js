@@ -28,6 +28,9 @@ const Direction = {
       snakeBodyY[0] = y;
   }
 
+    setupPlayerPosition(50,50);
+    window.requestAnimationFrame(gameLoop);
+
   function detectCollisionForOwnPlayer() {
     for(var i = bodyParts; i > 0; i--) {
         if(snakeBodyX[0] == snakeBodyX[i] && snakeBodyY[0] == snakeBodyY[i]) {
@@ -53,8 +56,7 @@ var yDif = snakeBodyY[0] - food.y;
 var distanceSquared = xDif * xDif + yDif * yDif;
 return distanceSquared < (30 + 30) * (30 + 30);
 }
-  setupPlayerPosition(50,50);
-window.requestAnimationFrame(gameLoop);
+
 function draw(){
     canvas.fillStyle = "red";
     canvas.fillRect(food.x,food.y,40,40);
@@ -97,13 +99,9 @@ function updateScore(){
 }
 
 function gameLoop() {
-    /*if(detectCollisionForOwnPlayer()){
-        window.cancelAnimationFrame(gameLoop);
-    }
-    else */
     if(detectCollisionWithFood()){
-        food.x = getRandomInt(1000);
-        food.y = getRandomInt(1000);
+        food.x = getRandomInt(780);
+        food.y = getRandomInt(780);
         bodyParts++;
         updateScore();
 

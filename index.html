@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
+    <title>Game Overview</title>
     <style>
         *{
-            background-color: grey;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-    canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
-}
+        ul{
+            list-style-type: none;
+        }
+ 
+        a{
+            text-decoration: none;
+            color:black;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
     </style>
-    <nav> <h1 style="float:right; position: relative;" id="scoreText">Score: 0</h1>
-    </nav>
+    
 
 </head>
 <body>
-    <canvas id="myCanvas" height="1000" width="1000" style="background-color: white;">
-    </canvas>
+    <h1 style="text-align: center;">Pick a game</h1>
+    <ul style="text-align: center;">
+        <li><a href="snake.html" target="_blank"><h2>Snake</h2></a></li>
+        <li><a href="pong.html" target="_blank" ><h2>Pong</h2></a></li>
+    </ul>
+
     
     
 </body>
