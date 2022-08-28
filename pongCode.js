@@ -8,7 +8,7 @@ var ball = {
     yVel: 5
 }
 
-var playerTwo = {
+var computerPlayer = {
     x:  900,
     y: 200
 }
@@ -26,8 +26,19 @@ function setVel(x,y){
     ball.yVel = y;
 }
   
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 var currentDirection;
-
+function computerMovement(){
+    var randomRange = getRandomArbitrary(500,650);
+    if(ball.x > randomRange && computerPlayer.y < ball.y){
+    computerPlayer.y += 5;
+    }
+    else if(ball.x > randomRange && computerPlayer.y >= ball.y){
+    computerPlayer.y -= 5;
+    }
+}
 function ballUpdate(){
     ball.x += ball.xVel;
     ball.y += ball.yVel;
@@ -60,10 +71,10 @@ function detectCollision(){
     if((ball.y>= playerOne.y+100) && (ball.y<= playerOne.y+200) &&(ball.x>=playerOne.x &&ball.x<=playerOne.x+10 )) {
         setVel(-ball.xVel, ball.yVel);
     }
-    if((ball.y>= playerTwo.y) && (ball.y<= playerTwo.y+100) &&(ball.x>=playerTwo.x &&ball.x<=playerTwo.x+10 )) {
+    if((ball.y>= computerPlayer.y) && (ball.y<= computerPlayer.y+100) &&(ball.x>=computerPlayer.x &&ball.x<=computerPlayer.x+10 )) {
         setVel(-ball.xVel, ball.yVel);
     }
-    if((ball.y>= playerTwo.y+100) && (ball.y<= playerTwo.y+200) &&(ball.x>=playerTwo.x &&ball.x<=playerTwo.x+10 )) {
+    if((ball.y>= computerPlayer.y+100) && (ball.y<= computerPlayer.y+200) &&(ball.x>=computerPlayer.x &&ball.x<=computerPlayer.x+10 )) {
         setVel(-ball.xVel, ball.yVel);
     }
     
@@ -79,11 +90,12 @@ function draw(){
     canvas.fill();
     canvas.fillStyle = "black";
 	canvas.fillRect(playerOne.x, playerOne.y, 20, 200);
-	canvas.fillRect(playerTwo.x, playerTwo.y, 20, 200);
+	canvas.fillRect(computerPlayer.x, computerPlayer.y, 20, 200);
 }
 function gameLoop(){
     canvas.clearRect(0, 0, 1000, 1000);
     ballUpdate();
+    computerMovement();
     detectCollision();
     checkForPoints();
     draw();
