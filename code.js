@@ -19,7 +19,8 @@ const Direction = {
     Up: 'Up',
     Down: 'Down',
     Left: 'Left',
-    Right: 'Right'
+    Right: 'Right',
+    None: 'None'
   };
 
   var currentDirection;
@@ -34,18 +35,18 @@ const Direction = {
   function detectCollisionForOwnPlayer() {
     for(var i = bodyParts; i > 0; i--) {
         if(snakeBodyX[0] == snakeBodyX[i] && snakeBodyY[0] == snakeBodyY[i]) {
-            return true;
+            return false;
         }
         if(snakeBodyX[0] < 0) {
             return true;
         }
-        if(snakeBodyX[0] > 700){
+        if(snakeBodyX[0] > 1000){
             return true;
         }
         if(snakeBodyY[0]<0) {
             return true;
         }
-        if(snakeBodyY[0] > 700) {
+        if(snakeBodyY[0] > 800) {
             return true;
         }
     }
@@ -97,6 +98,11 @@ function updateScore(){
     score++;
     scoreText.innerHTML = "Score: " + score;
 }
+function resetScore(){
+    var scoreText = document.getElementById("scoreText");
+    score = 0;
+    scoreText.innerHTML = "Score: " + score;
+}
 
 function gameLoop() {
     if(detectCollisionWithFood()){
@@ -105,6 +111,12 @@ function gameLoop() {
         bodyParts++;
         updateScore();
 
+    }
+    if(detectCollisionForOwnPlayer()){
+        bodyParts = 1;
+        setupPlayerPosition(50,50);
+        currentDirection = Direction.None;
+        resetScore();
     }
     canvas.clearRect(0, 0, 1000, 1000);
     draw();

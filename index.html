@@ -8,17 +8,36 @@
     <style>
         *{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: lightblue;
         }
         ul{
             list-style-type: none;
         }
- 
         a{
             text-decoration: none;
             color:black;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: white;
+            border:none;
         }
-        a:hover{
-            text-decoration: underline;
+        button{
+        background-color: white;
+        border: solid 2px green;
+        padding: 16px 32px;
+        margin-top: 20px;
+        width: 200px;
+        transition-duration: 0.4s;
+        color:black;
+            }
+        button:hover a{
+            background-color: green;
+            color: white;
+            border:none;
+        }
+        button:hover{
+            background-color: green;
+            color: white;
         }
     </style>
     
@@ -27,9 +46,10 @@
 <body>
     <h1 style="text-align: center;">Pick a game</h1>
     <ul style="text-align: center;">
-        <li><a href="snake.html" ><h2>Snake</h2></a></li>
-        <li><a href="pong.html"  ><h2>Pong</h2></a></li>
-        <li><a href="spaceInvaders.html"  ><h2>Space Invaders</h2></a></li>
+        <li><button><a href="snake.html">Snake</a></button></li>
+        <li><button><a href="pong.html">Pong</a></button></li>
+        <li><button><a href="spaceInvaders.html">Space Invaders</button></a></li>
+        <li><button><a href="tetris.html">Tetris</button></a></li>
     </ul>
 
     
