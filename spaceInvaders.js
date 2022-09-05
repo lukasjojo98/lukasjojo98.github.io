@@ -42,36 +42,15 @@ const Direction = {
   var tmpP = new Point(100,100);
   var enemyParticles = [new Particle(true,tmpP.x,tmpP.y)];
   var currentDirection;
-var spaceShipImage = new Image();
-spaceShipImage.src = "spaceship.png";
-var enemyImage = new Image();
-enemyImage.src = "enemy.png";
-window.onload = function(){
-    canvas.drawImage(spaceShipImage,playerPosition.x,playerPosition.y,50,50);
-}
+var spaceShipImage = document.getElementById("spaceship");
+var enemyImage = document.getElementById("enemy");
+
 var sources = {
     spaceship: "spaceship.png",
     enemy: "enemy.png"
 }
 
-function loadImages(sources, callback) {
-    var images = {};
-    var loadedImages = 0;
-    var numImages = 0;
-    // get num of sources
-    for(var src in sources) {
-      numImages++;
-    }
-    for(var src in sources) {
-      images[src] = new Image();
-      images[src].onload = function() {
-        if(++loadedImages >= numImages) {
-          callback(images);
-        }
-      };
-      images[src].src = sources[src];
-    }
-  }
+
 function initEnemies() {
     for(var i = 0; i < 7; i++) {
         for(var j = 0; j<3; j++) {
@@ -100,13 +79,11 @@ function moveParticlesOnUp(){
     }
 }
 function draw(){
-    loadImages(sources, function(images){
         for(var j = 0; j < enemies.length; j++) {
                 if(enemies[j].isAlive) {
-                    canvas.drawImage(images.enemy,enemies[j].x,enemies[j].y,50,50);
+                    canvas.drawImage(enemyImage,enemies[j].x,enemies[j].y,50,50);
                     }
                 }
-            });
     canvas.fillStyle = "blue";
     for(var i = 0; i < particles.length; i++){
         canvas.fillRect(particles[i].x+20,particles[i].y+10,15,15);
@@ -120,10 +97,8 @@ function draw(){
 //window.requestAnimationFrame(gameLoop);
 
 function gameLoop(){
-   canvas.clearRect(0, 0, 1000, 1000);
-    loadImages(sources, function(images){
-        canvas.drawImage(images.spaceship,playerPosition.x,playerPosition.y,50,50);
-    });
+    canvas.clearRect(0, 0, 1000, 1000);
+    canvas.drawImage(spaceShipImage,playerPosition.x,playerPosition.y,50,50);
 
     for(var p of particles) {
         for(var e of enemies) {
