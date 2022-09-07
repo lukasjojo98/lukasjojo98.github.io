@@ -4,6 +4,16 @@ var ctx2 = document.getElementById("nextShapeCanvas");
 var nextShapeCanvas = ctx2.getContext("2d");
 var player = {x:200,y:200}
 var img = document.getElementById("image");
+var ctx3 = document.getElementById("gameScore");
+var gameScoreCanvas = ctx3.getContext("2d");
+gameScoreCanvas.font = "25px Arial";
+gameScoreCanvas.fillText("Gamescore: 0", ctx3.clientWidth/32,ctx3.clientHeight/2);
+var scoreNumber = 0;
+
+function updateScore(score){
+    gameScoreCanvas.clearRect(0,0,1000,1000);
+    gameScoreCanvas.fillText("Gamescore: " + score,ctx3.clientWidth/32,ctx3.clientHeight/2)    ;
+}
 
 class Point{
     constructor(x,y){
@@ -182,19 +192,46 @@ function checkRow(){
     };
 }
 
+function shiftCol(arr, col) {
+    var prev = arr[arr.length - 1][col-1];
+    arr.forEach(function(v) {
+      var t = v[col - 1];
+      v[col - 1] = prev;
+      prev = t;
+    })
+    return arr;
+  }
+
 function deleteRow(){
     if(checkRow()["isRowComplete"]){
         var row = checkRow()["row"];
-        for(var m = 0; m < gameboard[row].length; m++){
-            gameboard[row][m] = {"color": null, "type": 0};     //deleting full row
+        if(row == gameboard.length - 1){
+            for(var i = 0; i < gameboard[row].length; i++){
+                shiftCol(gameboard, i);
+            }
+            for(var j = 0; j < gameboard[row].length; j++){
+                gameboard[0][j] = {"color": null, "type": 0}; 
+            }
+            return;
         }
+        var tmpGameboard1 = gameboard.slice(0, row);
+        var tmpGameboard2 = gameboard.slice(row, gameboard.length);
         //shifting all rows from 0 to l-1:
-        for(var i = 0; i < row; i++){
-            var tmpRow = gameboard[i];
-            gameboard[++i] = tmpRow;
+        for(var i = 0; i < tmpGameboard1[0].length; i++){
+            shiftCol(tmpGameboard1, i);
         }
         for(var n = 0; n < gameboard[0].length; n++){
             gameboard[0][n] = {"color": null, "type": 0};     //replacing first row with default row
+            tmpGameboard1[0][n] = {"color": null, "type": 0};
+        }
+
+        for(var k = 0; k  < gameboard.length; k++){
+            if(k >= 0 && k < row){
+                gameboard[k] = tmpGameboard1[k];
+            }
+            else{
+                gameboard[k] = tmpGameboard2[k];
+            }
         }
         console.log(gameboard)
     }
@@ -241,6 +278,7 @@ function checkRemainingTetrominos(piece){
                     currentTetromino = nextTetromino;
                     nextTetromino = new Tetromino(0,0,shapes[Math.trunc(Math.random() * shapes.length - 1)],colorData[Math.trunc(Math.random() * colorData.length - 1)]);
                     nextShape = JSON.parse(JSON.stringify(nextTetromino));
+                    updateScore(scoreNumber += 20);
                     return false;
                 }
                 else{
@@ -298,6 +336,7 @@ function checkBottom(piece){
                     currentTetromino = nextTetromino;
                     nextTetromino = new Tetromino(0,0,shapes[Math.trunc(Math.random() * shapes.length - 1)],colorData[Math.trunc(Math.random() * colorData.length - 1)]);
                     nextShape = JSON.parse(JSON.stringify(nextTetromino));
+                    updateScore(scoreNumber += 20);
                     return false;
                 }
             }
@@ -331,6 +370,7 @@ document.addEventListener("keydown", function(e) {
             break;
         case 40:
             console.log("down");
+            updateScore(scoreNumber += 10);
             currentTetromino.moveDown();
             if(checkBottom(currentTetromino) && checkRemainingTetrominos(currentTetromino)){
                 currentTetromino.update();

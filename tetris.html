@@ -20,10 +20,7 @@
         text-align: center;
         display: block;
     }*/
-    #nextShapeCanvas{
-        display: block;
-        
-    }
+   
     
     a{
     text-decoration: none;
@@ -34,6 +31,7 @@
 </head>
 <body>
     <canvas width="284" height="592" id="myCanvas" style="background-color: rgb(115, 209, 241);"></canvas>
+    <div>
     <canvas
       id="nextShapeCanvas"
       width="200"
@@ -41,6 +39,15 @@
       style=" background-color: rgb(142, 217, 242);"
     >
     </canvas>
+
+    <canvas
+      id="gameScore"
+      width="200"
+      height="200"
+      style=" background-color: rgb(142, 217, 242); float: right;"
+    >
+    </canvas>
+</div>
 
 </body>
 <img id="image" src="rotations.png" style="display: none" />
