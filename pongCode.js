@@ -85,7 +85,7 @@ function draw(){
 
     canvas.fillStyle = "red";
     canvas.beginPath();
-    canvas.arc(ball.x-10, ball.y-10, 20, 0,2 * Math.PI);
+    canvas.arc(ball.x-10, ball.y-10, 10, 0 ,2 * Math.PI);
     canvas.stroke();
     canvas.fill();
     canvas.fillStyle = "black";
