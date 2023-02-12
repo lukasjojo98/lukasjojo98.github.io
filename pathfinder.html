@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: #CCCCCC;
+        }
+        canvas{
+            margin: 50px auto;
+            display: block;
+        }
+        .ui{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .ui button{
+            font-weight: 700;
+        }
+    
+        #click p {
+            display: inline;
+            padding: 0;
+        }
+    </style>
+    <title>Pathfinding</title>
+</head>
+<body>
+    <canvas id="myCanvas" height="500px" width="500px"></canvas>
+    <div class="ui">
+        <button id="calculatePath">Calculate Path</button>
+        <button id="clearCanvas">Clear Canvas</button>
+        <div id="click">
+            <form action="" name="click">
+            <div><input type="radio" name="clicktype" value="start">
+                <p>Start</p></div>
+            <div><input type="radio" name="clicktype" value="goal">
+                <p>Goal</p>
+            </div>
+            <div>
+            <input type="radio" name="clicktype" value="obstacles">
+            <p>Obstacles</p>
+        </div></form>
+        </div>
+    </div>
+</body>
+<script src="pathfinder.js"></script>
+</html>
