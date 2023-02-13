@@ -24,10 +24,13 @@ let state = {
 let start;
 var gridSize = 10;
 var grid = [];
-for (var i=0; i<gridSize; i++) {
-  grid[i] = [];
-  for (var j=0; j<gridSize; j++) {
-    grid[i][j] = 'Empty';
+
+let initBoard = function(){
+  for (var i=0; i<gridSize; i++) {
+    grid[i] = [];
+    for (var j=0; j<gridSize; j++) {
+      grid[i][j] = 'Empty';
+    }
   }
 }
 
@@ -54,7 +57,6 @@ function checkClick(color, type){
 }
 ctx.addEventListener("click", (event) => {
 
-    console.log(event.offsetX)
     let clickType = document.click.clicktype.value;
     
     if(event.offsetY < 510){
@@ -80,9 +82,16 @@ document.getElementById("calculatePath").addEventListener("click", () => {
     drawPath(start, path);
 });
 document.addEventListener("DOMContentLoaded", () => {
+    initBoard();
     drawBoard();
 })
 document.getElementById("clearCanvas").addEventListener("click", () => {
+  state = {
+    pickStart: false,
+    pickGoal: false,
+    pickObstacles: false
+  };
+    initBoard();
     canvas.clearRect(0, 0, 1000, 1000);
     drawBoard();
 
@@ -94,7 +103,6 @@ var drawPath = function(location, path){
         x: location[0] * 50 + 25
     }
     for (var i = 0; i < path.length; i++){
-        
         canvas.beginPath();
         canvas.moveTo(nextLocation.x, nextLocation.y);
         if(path[i] === 'North'){
