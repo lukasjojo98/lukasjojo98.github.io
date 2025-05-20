@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebenslauf</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        input, button, select, label {
+            padding: 10px;
+            margin: 5px;
+        }
+        ul {
+            padding: 2px 10px;
+            margin: 5px;
+        }
+        .navbar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .line {
+            width: 75px;
+            height: .5px;
+            background-color: black;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        .sub-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .forms {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-items-container {
+            display: flex;
+        }
+        .form-items-container input, select {
+            flex: 1;
+        }
+        .form-container {
+            overflow-y: scroll;
+            max-height: 100vh;
+            width: 50%;
+        }
+        .preview-container {
+            background-color: #f4f4f5;
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            max-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .preview-sub-container {
+            width: 400px;
+            height: 550px;
+            background-color: white;
+        }
+        .preview-item{
+            margin: 5px 20px;
+        }
+        .preview-item {
+        }
+        .name-preview {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .description-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .header {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        .personal-details-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 2px solid black;
+        }
+        .educational-background-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 2px solid black;
+        }
+        .educational-background-item {
+            display: flex;
+            flex-direction: row;
+            padding: 5px 0;
+        }
+        .experience-background-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 2px solid black;
+        }
+        .experience-background-item {
+            display: flex;
+            flex-direction: row;
+            padding: 5px 0;
+        }
+        .personal-details-item {
+            display: flex;
+            flex-direction: row;
+            padding: 5px 0;
+        }
+        .border-bottom {
+            border-bottom: black 1px solid;
+        }
+        .education-details-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 10px;
+        }
+        #preview-skills-container {
+            display: flex;
+            flex-direction: column;
+            font-size: 10px;
+            padding: 5px 0;
+        }
+        .experience-details-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 10px;
+        }
+        h5 {
+            margin: 0;
+        }
+        .skill-location {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;   
+        }
+        .skill-element {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: black;
+            padding: 3px 10px;
+            gap: 10px;
+        }
+   
+        .skill-element:hover {
+            cursor: pointer;
+            background-color: grey;
+        }
+        @media print {
+        body * {
+            visibility: hidden;
+        }
+        #print-section, #print-section * {
+            visibility: visible;
+        }
+        #print-section {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <p>Persönliche Infos</p>
+            <div class="line"></div>
+            <p>Erfahrung</p>
+            <div class="line"></div>
+            <p>Ausbildung</p>
+            <div class="line"></div>
+            <p>Fähigkeiten</p>
+        </div>
+        <div class="sub-container">
+            <div class="preview-container">
+                <div class="preview-sub-container" id="print-section">
+                    <div class="preview-item header" id="preview-header">
+                        <div id="profile-image-preview"></div>
+                        <div class="description-container">
+                            <div class="name-preview">
+                                <div id="vorname-preview" style="font-weight: bold;"></div>
+                                <div id="nachname-preview" style="font-weight: bold;"></div>
+                            </div>
+                            <div id="description-text-preview"  style="font-size: 10px; line-height: 1;"></div>
+                        </div>
+                    </div>
+                    <div class="preview-item personal-details-container" id="personal-details">
+                        <h5>Personal Details</h5>
+                        <div class="personal-details-item border-bottom" id="adress-container">
+                            <div style="width: 150px; font-weight: bold; font-size: 10px;">Adress</div>
+                            <div id="adress-preview" style="font-size: 10px;"></div>
+                        </div>
+                        <div class="personal-details-item border-bottom" id="country-container">
+                            <div style="width: 150px; font-weight: bold; font-size: 10px;">Country</div>
+                            <div id="country-preview" style="font-size: 10px;"></div>
+                        </div>
+                        <div class="personal-details-item border-bottom" id="phone-container">
+                            <div style="width: 150px; font-weight: bold; font-size: 10px;">Phone</div>
+                            <div id="phone-preview" style="font-size: 10px;"></div>
+                        </div>
+                        <div class="personal-details-item border-bottom" id="email-container">
+                            <div style="width: 150px; font-weight: bold; font-size: 10px;">E-Mail</div>
+                            <div id="email-preview" style="font-size: 10px;"></div>
+                        </div>
+                        <div class="personal-details-item" id="dob-container">
+                            <div style="width: 150px; font-weight: bold; font-size: 10px;">DOB</div>
+                            <div id="dob-preview" style="font-size: 10px;"></div>
+                        </div>
+                    </div>
+                    <div class="preview-item educational-background-container" id="educational-background">
+                        <h5>Educational Background</h5>
+                        <div class="education-details-container" id="education-container-1">
+                            <div class="education-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="degree-container-1"></div>
+                                    <div id="specialization-container-1"></div>
+                                </div>
+                                <div id="university-container-1"></div>
+                            </div>
+                            <div class="education-details-item" id="education-timespan-1"></div>
+                        </div>
+                        <div class="education-details-container" id="education-container-2">
+                            <div class="education-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="degree-container-2"></div>
+                                    <div id="specialization-container-2"></div>
+                                </div>
+                                <div id="university-container-2"></div>
+                            </div>
+                            <div class="education-details-item" id="education-timespan-2"></div>
+                        </div>
+                        <div class="education-details-container" id="education-container-3">
+                            <div class="education-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="degree-container-3"></div>
+                                    <div id="specialization-container-3"></div>
+                                </div>
+                                <div id="university-container-3"></div>
+                            </div>
+                            <div class="education-details-item" id="education-timespan-3"></div>
+                        </div>
+                    </div>
+                    <div class="preview-item experience-background-container" id="experience-background">
+                        <h5>Professional Experience</h5>
+                        <div class="experience-details-container" id="experience-container-1">
+                            <div class="experience-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="job-title-container-1"></div>
+                                </div>
+                                <div id="employer-container-1"></div>
+                                <ul id="task-list-1"></ul>
+                            </div>
+                            <div class="experience-details-item" id="experience-timespan-1"></div>
+                        </div>
+                        <div class="experience-details-container" id="experience-container-2">
+                            <div class="experience-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="job-title-container-2"></div>
+                                </div>
+                                <div id="employer-container-2"></div>
+                                <ul id="task-list-2"></ul>
+                            </div>
+                            <div class="experience-details-item" id="experience-timespan-2"></div>
+                        </div>
+                        <div class="experience-details-container" id="experience-container-3">
+                            <div class="experience-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="job-title-container-3"></div>
+                                </div>
+                                <div id="employer-container-3"></div>
+                                <ul id="task-list-3"></ul>
+                            </div>
+                            <div class="experience-details-item" id="experience-timespan-3"></div>
+                        </div>
+                        <div class="experience-details-container" id="experience-container-4">
+                            <div class="experience-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="job-title-container-4"></div>
+                                </div>
+                                <div id="employer-container-4"></div>
+                                <ul id="task-list-4"></ul>
+                            </div>
+                            <div class="experience-details-item" id="experience-timespan-4"></div>
+                        </div>
+                        <div class="experience-details-container" id="experience-container-5">
+                            <div class="experience-details-item">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div id="job-title-container-5"></div>
+                                </div>
+                                <div id="employer-container-5"></div>
+                                <ul id="task-list-5"></ul>
+                            </div>
+                            <div class="experience-details-item" id="experience-timespan-5"></div>
+                        </div>
+                        
+                    </div>
+                    <div class="preview-item" id="skills">
+                        <h5>Skills</h5>
+                        <div id="preview-skills-container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="forms">
+                    <div class="form-items-container">
+                        <p>Profilbild</p>
+                        <input type="file" name="Profilbild" id="picture-input">
+                    </div>
+                    <div class="form-items-container">
+                        <img src="" alt="Profilbild" id="profile-image" style="display: none;">
+                    </div>
+                    <h2>Persönliche Infos</h2>
+                    <div class="form-items-container">
+                        <input type="text" name="Vorname" placeholder="Vorname" id="vorname-input" onkeypress="onChangeVorname(this)" onkeyup="onChangeVorname(this)">
+                        <input type="text" name="Nachname" placeholder="Nachname" id="nachname-input" onkeypress="onChangeNachname(this)" onkeyup="onChangeNachname(this)">
+                    </div>
+                    <div class="form-items-container">
+                        <input type="date" name="Geburtsdatum" placeholder="Geburtsdatum" onchange="onChangeDOB(this)" id="dob-input">
+                        <input type="text" name="Geburtsort" placeholder="Geburtsort" onkeypress="onChangePOB(this)" onkeyup="onChangePOB(this)" id="pob-input">
+                    </div>
+                    <div class="form-items-container">
+                        <input type="text" name="Adresse" placeholder="Adresse" onkeypress="onChangeAdresse(this)" onkeyup="onChangeAdresse(this)" id="adress-input">
+                    </div>
+                    <div class="form-items-container">
+                        <input type="text" name="PLZ" placeholder="PLZ" onkeypress="onChangePLZ(this)" onkeyup="onChangePLZ(this)" id="plz-input">
+                        <input type="text" name="Stadt" placeholder="Stadt" onkeypress="onChangeCity(this)" onkeyup="onChangeCity(this)" id="city-input">
+                    </div>
+                    <div class="form-items-container">
+                        <input type="text" name="Land" placeholder="Land" onkeypress="onChangeCountry(this)" onkeyup="onChangeCountry(this)" id="country-input">
+                        <input type="text" name="Telefon" placeholder="Telefon" onkeypress="onChangePhone(this)" onkeyup="onChangePhone(this)" id="phone-input">
+                    </div>
+                    <div class="form-items-container">
+                        <input type="email" name="E-Mail" placeholder="E-Mail" onkeypress="onChangeEmail(this)" onkeyup="onChangeEmail(this)" id="email-input">
+                    </div>
+                    <h2 id="experience-header">Erfahrung</h2>
+                    <div class="form-items-container experience-item experience-1">
+                        <input type="text" name="Job-Titel" placeholder="Job-Titel" id="job-title-1" onkeypress="onChangeJobTitle(this)" onkeyup="onChangeJobTitle(this)">
+                    </div>
+                    <div class="form-items-container experience-item experience-1">
+                        <input type="text" name="Arbeitgeber" placeholder="Arbeitgeber" id="employer-1" onkeypress="onChangeEmployer(this)" onkeyup="onChangeEmployer(this)">
+                    </div>
+                    <div class="form-items-container experience-item experience-1">
+                        <select name="Branche" id="branch-1" onchange="onChangeBranch(this)">
+                            <option value="Branche" disabled selected>Branche</option>
+                            <option value="Architektur, Bauwesen">Architektur, Bauwesen</option>
+                            <option value="Automobil- und Fahrzeugbau">Automobil- und Fahrzeugbau</option>
+                            <option value="Banken, Finanzdienstleistungen">Banken, Finanzdienstleistungen</option>
+                            <option value="Beratung, Consulting">Beratung, Consulting</option>
+                            <option value="Energie, Wasser, Umwelt">Energie, Wasser, Umwelt</option>
+                            <option value="Erziehung, Bildung, Wissenschaft">Erziehung, Bildung, Wissenschaft</option>
+                            <option value="Gesundheit, Soziales">Gesundheit, Soziales</option>
+                            <option value="Immobilien">Immobilien</option>
+                            <option value="Industrie und Maschinenbau">Industrie und Maschinenbau</option>
+                            <option value="Internet, IT">Internet, IT</option>
+                            <option value="Konsumgüter, Handel">Konsumgüter, Handel</option>
+                            <option value="Kunst, Kultur, Sport">Kunst, Kultur, Sport</option>
+                            <option value="Marketing, PR und Design">Marketing, PR und Design</option>
+                            <option value="Medien, Verlage">Medien, Verlage</option>
+                            <option value="Personaldienstleistungen">Personaldienstleistungen</option>
+                            <option value="Pharma, Medizintechnik">Pharma, Medizintechnik</option>
+                            <option value="Sonstige Branchen">Sonstige Branchen</option>
+                            <option value="Telekommunikation">Telekommunikation</option>
+                            <option value="Tourismus, Gastronomie">Tourismus, Gastronomie</option>
+                            <option value="Transport, Logistik">Transport, Logistik</option>
+                            <option value="Versicherungen">Versicherungen</option>
+                            <option value="Wirtschaftsprüfung, Steuern, Recht">Wirtschaftsprüfung, Steuern, Recht</option>
+                            <option value="Öffentlicher Dienst, Verbände und Einrichtungen">Öffentlicher Dienst, Verbände und Einrichtungen</option>
+                        </select>
+                    </div>
+                    <div class="form-items-container experience-item experience-1">
+                        <input type="text" name="Tätigkeitsfeld" placeholder="Tätigkeitsfeld" id="work-area-1" onkeypress="onChangeWorkArea(this)" onkeyup="onChangeWorkArea(this)">
+                        <input type="text" name="Karriere-Stufe" placeholder="Karriere-Stufe" id="career-level-1" onkeypress="onChangeCareerLevel(this)" onkeyup="onChangeCareerLevel(this)">
+                    </div>
+                    <div class="form-items-container experience-item experience-1">
+                        <input type="date" name="Start-Datum" placeholder="Start-Datum" id="experience-start-1" onchange="onChangeExperienceStart(this)" onkeyup="onChangeExperienceStart(this)">
+                        <input type="date" name="End-Datum" placeholder="End-Datum" id="experience-end-1" onchange="onChangeExperienceEnd(this)" onkeyup="onChangeExperienceEnd(this)">
+                    </div>
+                    <div class="form-items-container experience-1" id="add-task-location-1">
+                        <input type="text" name="Meine Kernaufgaben" placeholder="Meine Kernaufgaben" id="task-1-1" onkeypress="onChangeTask(this)" onkeyup="onChangeTask(this)">
+                        <button onclick="removeTask(this)">(-)</button>
+                    </div>
+                    <div class="form-items-container experience-1" style="justify-content: end;">
+                        <button onclick="addTask(this)">Kernaufgabe hinzufügen (+)</button>
+                    </div>
+                    <div class="form-items-container experience-1">
+                        <button onclick="removeExperience(this)">Erfahrung entfernen (-)</button>
+                    </div>
+                    <div class="form-items-container" style="justify-content: end;" id="add-experience">
+                        <button onclick="addExperience()">Erfahrung hinzufügen (+)</button>
+                    </div>
+                    <h2 id="education-header">Ausbildung</h2>
+                    <div class="form-items-container education-item education-1">
+                        <input type="text" name="Fachrichtung" placeholder="Fachrichtung" id="specialization-1" onkeypress="onChangeSpecialization(this)" onkeyup="onChangeSpecialization(this)">
+                    </div>
+                    <div class="form-items-container education-item education-1">
+                        <input type="text" name="Hochschule" placeholder="Hochschule" id="university-1" onkeypress="onChangeUniversity(this)" onkeyup="onChangeUniversity(this)">
+                    </div>
+                    <div class="form-items-container education-item education-1">
+                        <input type="text" name="Abschluss" placeholder="Abschluss" id="degree-1" onkeypress="onChangeDegree(this)" onkeyup="onChangeDegree(this)">
+                    </div>
+                    <div class="form-items-container education-item education-1">
+                        <input type="date" name="Start-Datum" placeholder="Start-Datum" id="education-start-1" onchange="onChangeEducationStart(this)" onkeyup="onChangeEducationStart(this)">
+                        <input type="date" name="End-Datum" placeholder="End-Datum" id="education-end-1" onchange="onChangeEducationEnd(this)" onkeyup="onChangeEducationEnd(this)">
+                    </div>
+                    <div class="form-items-container education-1" id="remove-education-1">
+                        <button onclick="removeEducation(this)">Ausbildung löschen (-)</button>
+                    </div>
+                    <div class="form-items-container" id="add-education" style="justify-content: end;">
+                        <button onclick="addEducation()">Ausbildung hinzufügen (+)</button>
+                    </div>
+                    <h2>Fähigkeiten</h2>
+                    <div class="form-items-container" id="">
+                        <input type="text" name="skills" placeholder="Fähigkeiten" id="" onkeypress="onChangeSkills(this, event)">
+                        <button onclick="addSkill(this)">(+)</button>
+                    </div>
+                    <div class="skill-location" id="skill-location">
+                    </div>
+                    <h2>Über mich</h2>
+                    <div class="form-items-container">
+                        <textarea name="description-text" id="description-text-input" cols="30" rows="10" onchange="onChangeDescriptionText(this)" onkeyup="onChangeDescriptionText(this)"></textarea>
+                    </div>
+                    <div class="form-items-container" style="justify-content: center;">
+                        <button onclick="generatePDF()">PDF exportieren</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.5/dist/purify.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" defer></script>
+<script src="code.js" defer></script>
+</html>
