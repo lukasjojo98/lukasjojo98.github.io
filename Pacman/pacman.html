@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacman</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .row-item {
+            display: flex;
+            flex-direction: row;
+        }
+        .field-item {
+            width: 15px;
+            height: 15px;
+            background-color: white;
+        }
+        .wall-item {
+            background-color: blue;
+        }
+        .pacman-item {
+            background-color: yellow;
+            border-radius: 50%;
+        }
+        .collect-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circle-item {
+            width: 5px;
+            aspect-ratio: 1;
+            background-color: red;
+            border-radius: 50%;
+        }
+        img {
+            width: 15px;
+            aspect-ratio: 1;
+        }
+        .score-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-weight: bold;
+            gap: 20px;
+        }
+        button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+    <div class="score-container">
+        <div class="score">Game Score: 0</div>
+        <button id="restart-button">Restart</button>
+    </div>
+</body>
+<script src="code.js" type="module"></script>
+</html>
